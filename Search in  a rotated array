@@ -1,0 +1,51 @@
+class Solution{
+    public:
+    
+    //finding the pivot element 
+    int pivotElement( int A[], int n, int key){
+        
+        int s=0;
+        int e=n;
+        int mid=s+(e-s)/2;
+        while(s<e){
+            if(A[mid]>=A[0]){
+                s=mid+1;
+            }
+            else{
+                e=mid;
+            }
+             mid=s+(e-s)/2;
+        }
+        return s;
+    }
+    
+    //function for binary search
+    int binarySearch(int a[], int start, int end, int key){
+        int mid=start+(end-start)/2;
+        while(start<=end){
+            if(a[mid]==key)
+                {return mid;}
+            else if(a[mid]>key)
+                {end=mid-1;}
+            else
+                {start=mid+1;}
+            mid=start+(end-start)/2;
+        }
+        return -1;
+    }
+    
+    
+    int search(int A[], int l, int h, int key){
+        int pivot=pivotElement(A,l+h,key);
+        int ans;
+        
+            if(A[pivot]<=key && key<=A[h]){
+               ans= binarySearch(A,pivot,h,key);
+            }
+            else{
+                ans= binarySearch(A,l,pivot-1,key);
+            }
+         return ans;
+        
+    }
+};
